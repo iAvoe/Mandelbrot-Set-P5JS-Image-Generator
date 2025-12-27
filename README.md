@@ -7,6 +7,7 @@ Code and commandlines used to create large mandelbrot set picture and result ima
 
 Semi-automatically generate 4x4 separate images in [editor.p5.js](https://editor.p5js.org/).
 - Limitation: 8bit PNG is the bes format it offers, but it is good enough
+- Limitation: since the result image is huge, we can only do this by creating smaller tiles of it
 - You can try a different color scheme in the worker's code
 
 ```js
@@ -19,7 +20,7 @@ let workers = [];
 let completedWorkers = 0;
 let startTime;
 
-// Limitation: 14000x8000 is approaching standard resultion limit, so we combine them later
+// Limitation: 14000x8000 is about the maximum resolution allowed
 const FULL_WIDTH = 56000; // Entirety width after assembly
 const FULL_HEIGHT = 32000; // Entirety height after assembly
 const ASPECT_RATIO = FULL_WIDTH / FULL_HEIGHT;
