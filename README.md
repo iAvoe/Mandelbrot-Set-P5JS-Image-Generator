@@ -1,12 +1,16 @@
 # Mandelbrot-Set-P5JS-Image-Generator
 
-Code and commandlines used to create large mandelbrot set picture and result image. Using P5.js and ImgMagick.
+Code and commandlines used to create large Mandelbrot set picture and result image. Using P5.js and ImgMagick.
 - Original tutorial (starter code): [YouTube/J Alex Carney](https://www.youtube.com/watch?v=ixFCsST2pF4&pp=ygUYaG93IHRvIGNyZWF0ZSBtYW5kZWxicm90)
+
+## Result image
+
+A 32K 8bit image has been uploaded to this repository. Royalty free.
 
 ## Generation
 
 Semi-automatically generate 4x4 separate images in [editor.p5.js](https://editor.p5js.org/).
-- Limitation: 8bit PNG is the bes format it offers, but it is good enough
+- Limitation: 8bit PNG is the best format it offers, but it is good enough
 - Limitation: since the result image is huge, we can only do this by creating smaller tiles of it
 - You can try a different color scheme in the worker's code
 
@@ -282,7 +286,7 @@ function createWorkerScript() {
 
 Using Imgmagick to combine generated 4x4 images into the final result, encode to TIFF with maximum compression:
 - Don't try to do this manually, its slow and complicated
-- Advanced image editors like PhotoShop, have mandatory PPI resampling, thereby destroying all the details
+- Advanced image editors like Photoshop, have mandatory PPI resampling, thereby destroying all the details
 - Change image paths to your generated image folder/directory
 - Change line break symbol if you are not using CMD (shell, bash, etc.)
 
