@@ -1,27 +1,15 @@
-# Mandelbrot-Set-P5JS-Image-Generator
-
-Code and commandlines used to create large mandelbrot set picture and result image. Using P5.js and ImgMagick.
-- Original tutorial (starter code): [YouTube/J Alex Carney](https://www.youtube.com/watch?v=ixFCsST2pF4&pp=ygUYaG93IHRvIGNyZWF0ZSBtYW5kZWxicm90)
-
-## Generation
-
-Semi-automatically generate 4x4 separate images in [editor.p5.js](https://editor.p5js.org/).
-- Limitation: 8bit PNG is the bes format it offers, but it is good enough
-- You can try a different color scheme in the worker's code
-
-```js
 // Divide the entire image into a ROWS x COLS grid, and render a separate tile each time (specified by ROW, COL, 0-based)
 const MAX_ITER = 4500;
 const ESCAPE_RADIUS = 4;
-// Utilizing parallelism to complete render faster, setting additional 2 workers since some rendering slices are much faster
+// Utilizing parallelism to complete render faster
 const WORKER_COUNT = navigator.hardwareConcurrency + 2 || 4;
 let workers = [];
 let completedWorkers = 0;
 let startTime;
 
 // Limitation: 14000x8000 is approaching standard resultion limit, so we combine them later
-const FULL_WIDTH = 56000; // Entirety width after assembly
-const FULL_HEIGHT = 32000; // Entirety height after assembly
+const FULL_WIDTH = 56000;   // Entirety width after assembly
+const FULL_HEIGHT = 32000;   // Entirety height after assembly
 const ASPECT_RATIO = FULL_WIDTH / FULL_HEIGHT;
 
 // Render 1 tile per run
@@ -29,6 +17,7 @@ const ROWS = 4; // Splitted image row
 const COLS = 4; // Splitted image column
 const ROW = 3; // Current tile row index (Manual control, range: 0..ROWS-1)
 const COL = 3; // Current tile col index (Manual control, range: 0..COLS-1)
+// -----------------------------------------
 
 // Coordinates
 let cenX = -1;
@@ -275,31 +264,3 @@ function createWorkerScript() {
 
   return URL.createObjectURL(new Blob([workerCode], { type: 'application/javascript' }));
 }
-```
-
-## Combination
-
-Using Imgmagick to combine generated 4x4 images into the final result, encode to TIFF with maximum compression:
-- Don't try to do this manually, its slow and complicated
-- Advanced image editors like PhotoShop, have mandatory PPI resampling, thereby destroying all the details
-- Change image paths to your generated image folder/directory
-- Change line break symbol if you are not using CMD (shell, bash, etc.)
-
-```batch
-magick ^
-  ( mandelbrot_r0_c0.png mandelbrot_r0_c1.png mandelbrot_r0_c2.png mandelbrot_r0_c3.png +append ) ^
-  ( mandelbrot_r1_c0.png mandelbrot_r1_c1.png mandelbrot_r1_c2.png mandelbrot_r1_c3.png +append ) ^
-  ( mandelbrot_r2_c0.png mandelbrot_r2_c1.png mandelbrot_r2_c2.png mandelbrot_r2_c3.png +append ) ^
-  ( mandelbrot_r3_c0.png mandelbrot_r3_c1.png mandelbrot_r3_c2.png mandelbrot_r3_c3.png +append ) ^
-  -append ^
-  -depth 8 ^
-  -type TrueColor ^
-  -define tiff:predictor=2 ^
-  -define tiff:big=true ^
-  -define tiff:tile-geometry=256x256 ^
-  -define tiff:zip-quality=9 ^
-  -define tiff:rows-per-strip=1 ^
-  -compress Zip ^
-  -quality 100 ^
-  mandelbrot_combined.tif
-```

@@ -1,0 +1,18 @@
+This commandline uses CMD/Batch line breaks, replace the line breaks by need and add proper path for the images to use it. (magick installation automatically adds itself to PATH, so it can be ignored)
+
+magick ^
+  ( mandelbrot_r0_c0.png mandelbrot_r0_c1.png mandelbrot_r0_c2.png mandelbrot_r0_c3.png +append ) ^
+  ( mandelbrot_r1_c0.png mandelbrot_r1_c1.png mandelbrot_r1_c2.png mandelbrot_r1_c3.png +append ) ^
+  ( mandelbrot_r2_c0.png mandelbrot_r2_c1.png mandelbrot_r2_c2.png mandelbrot_r2_c3.png +append ) ^
+  ( mandelbrot_r3_c0.png mandelbrot_r3_c1.png mandelbrot_r3_c2.png mandelbrot_r3_c3.png +append ) ^
+  -append ^
+  -depth 8 ^
+  -type TrueColor ^
+  -define tiff:predictor=2 ^
+  -define tiff:big=true ^
+  -define tiff:tile-geometry=256x256 ^
+  -define tiff:zip-quality=9 ^
+  -define tiff:rows-per-strip=1 ^
+  -compress Zip ^
+  -quality 100 ^
+  mandelbrot_combined.tif
