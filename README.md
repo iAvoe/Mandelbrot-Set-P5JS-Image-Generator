@@ -7,6 +7,7 @@ Code and commandlines used to create large Mandelbrot set picture and result ima
 
 A 32K resolution 8bit image, and a 64K resolution has been attached into this repository. Royalty free.
 - The 64K image is probably violating GitHub's usage...
+- Yes, zoom-in is required even with a 4K monitor
 
 ## Generation
 
@@ -310,7 +311,7 @@ magick ^
   mandelbrot_combined.tif
 ```
 
-Since this image will be vertically symmetrical, we can only generate the upper half, flip and combine the full image with imgmagick
+Since this image will be vertically symmetrical, we can generate only the upper half, and flip-combine the full image out with imgmagick
 
 ```batch
 magick ^
