@@ -5,7 +5,8 @@ Code and commandlines used to create large Mandelbrot set picture and result ima
 
 ## Result image
 
-A 32K 8bit image has been uploaded to this repository. Royalty free.
+A 32K resolution 8bit image, and a 64K resolution has been attached into this repository. Royalty free.
+- The 64K image is probably violating GitHub's usage...
 
 ## Generation
 
@@ -284,7 +285,7 @@ function createWorkerScript() {
 
 ## Combination
 
-Using Imgmagick to combine generated 4x4 images into the final result, encode to TIFF with maximum compression:
+Using Imgmagick to combine generated 16 tiles into the final result, encode to TIFF with maximum compression:
 - Don't try to do this manually, its slow and complicated
 - Advanced image editors like Photoshop, have mandatory PPI resampling, thereby destroying all the details
 - Change image paths to your generated image folder/directory
@@ -307,4 +308,23 @@ magick ^
   -compress Zip ^
   -quality 100 ^
   mandelbrot_combined.tif
+```
+
+Since this image will be vertically symmetrical, we can only generate the upper half, flip and combine the full image with imgmagick
+
+```batch
+magick ^
+  D:\Desktop\p5js\mandelbrot_combined_upper.tif ^
+  ( +clone -flip ) ^
+  -append ^
+  -depth 8 ^
+  -type TrueColor ^
+  -define tiff:predictor=2 ^
+  -define tiff:big=true ^
+  -define tiff:tile-geometry=256x256 ^
+  -define tiff:zip-quality=9 ^
+  -define tiff:rows-per-strip=1 ^
+  -compress Zip ^
+  -quality 100 ^
+  D:\Desktop\p5js\mandelbrot_combined_full.tif
 ```

@@ -16,3 +16,20 @@ magick ^
   -compress Zip ^
   -quality 100 ^
   mandelbrot_combined.tif
+
+Since this image is vertically symmetrical, we can only generate the upper half, flip in imgmagick, and combine the full image out of it
+
+magick ^
+  D:\Desktop\p5js\mandelbrot_combined_upper.tif ^
+  ( +clone -flip ) ^
+  -append ^
+  -depth 8 ^
+  -type TrueColor ^
+  -define tiff:predictor=2 ^
+  -define tiff:big=true ^
+  -define tiff:tile-geometry=256x256 ^
+  -define tiff:zip-quality=9 ^
+  -define tiff:rows-per-strip=1 ^
+  -compress Zip ^
+  -quality 100 ^
+  D:\Desktop\p5js\mandelbrot_combined_full.tif
