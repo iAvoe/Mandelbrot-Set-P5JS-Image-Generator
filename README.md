@@ -37,6 +37,14 @@ const COLS = 4; // Splitted image column
 const ROW = 3; // Current tile row index (Manual control, range: 0..ROWS-1)
 const COL = 3; // Current tile col index (Manual control, range: 0..COLS-1)
 
+/*
+Note: 2x Upscale
+const FULL_WIDTH = 112000;
+const FULL_HEIGHT = 64000;
+const ROWS = 8; // ROW: 0-7
+const COLS = 8; // COL: 0-7
+*/
+
 // Coordinates
 let cenX = -1;
 let cenY = 0;
