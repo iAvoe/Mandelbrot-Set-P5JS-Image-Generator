@@ -323,7 +323,7 @@ Since this image will be vertically symmetrical, we can generate only the upper 
 
 ```batch
 magick ^
-  D:\Desktop\p5js\mandelbrot_combined_upper.tif ^
+  mandelbrot_combined_upper.tif ^
   ( +clone -flip ) ^
   -append ^
   -depth 8 ^
@@ -335,5 +335,5 @@ magick ^
   -define tiff:rows-per-strip=1 ^
   -compress Zip ^
   -quality 100 ^
-  D:\Desktop\p5js\mandelbrot_combined_full.tif
+  mandelbrot_combined_full.tif
 ```
